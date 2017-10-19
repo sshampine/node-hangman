@@ -1,21 +1,17 @@
 var Letter = function (character) {
-	this.ltr = character;
-	this.isThere = false;
-	this.letterRender = function() {
-		if (this.ltr == " ") {
-			this.isThere = true;
-			//console.log("a space ")
-			return " "; //returns a blank for blank
-			
-		}
-		if (this.isThere === false) {
-			//console.log(" _ ")
-			return " _ "; //returns _ for letter
-			
-		} else {
-			//console.log(this.ltr)
-			return this.ltr; //returns letter
-			
+	if (character === " ") {
+		this.blank = " ";
+		this.isGuessed = true;
+	} else {
+		this.blank = "_";
+		this.secret = character.toLowerCase();
+		this.isGuessed = false;
+	}
+	this.check = function(guess, callback) {
+		if(guess.toLowerCase() === this.secret) {
+			this.blank = guess;
+			this.isGuessed = true;
+			callback(true)
 		}
 	}
 }
